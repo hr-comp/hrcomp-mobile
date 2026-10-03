@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>HR COMP 모바일</title>
+
+    <link rel="stylesheet" href="stock.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- =====================================================
+         LOGIN
+         ===================================================== -->
+
+    <section id="loginSection" class="hidden">
+
+        <header class="login-header">
+
+            <div class="company">
+                HR COMP
+            </div>
+
+            <h1>
+                모바일 업무조회
+            </h1>
+
+        </header>
+
+
+        <div class="login-card">
+
+            <label for="txtEmail">
+                이메일
+            </label>
+
+            <input
+                type="email"
+                id="txtEmail"
+                autocomplete="username"
+            >
+
+
+            <label for="txtPassword">
+                비밀번호
+            </label>
+
+            <input
+                type="password"
+                id="txtPassword"
+                autocomplete="current-password"
+            >
+
+
+            <button id="btnLogin"
+                    class="login-button">
+
+                로그인
+
+            </button>
+
+
+            <div id="loginMessage"
+                 class="login-message">
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STOCK
+         ===================================================== -->
+
+    <section id="stockSection" class="hidden">
+
+
+        <header class="stock-header">
+
+            <div>
+
+                <div class="company">
+                    HR COMP
+                </div>
+
+                <h1>
+                    현재재고 조회
+                </h1>
+
+            </div>
+
+
+            <button id="btnLogout"
+                    class="logout-button">
+
+                로그아웃
+
+            </button>
+
+        </header>
+
+
+
+        <div class="search-area">
+
+            <input
+                type="text"
+                id="txtSearch"
+                placeholder="품번 / 품명 검색"
+                autocomplete="off"
+            >
+
+            <button id="btnSearch">
+                검색
+            </button>
+
+        </div>
+
+
+
+        <div id="resultCount"
+             class="result-count">
+
+            품번 또는 품명을 입력하세요.
+
+        </div>
+
+
+
+        <div id="stockList">
+        </div>
+
+
+    </section>
+
+
+</div>
+
+
+<script src="stock.js"></script>
+
+</body>
+
+</html>
