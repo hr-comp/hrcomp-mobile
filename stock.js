@@ -384,8 +384,7 @@ txtPassword.addEventListener(
 );
 
 
-btnLogout.addEventListener("click", logout);
-document.querySelectorAll(".btnLogout").forEach(btn => btn.addEventListener("click", logout));
+document.querySelectorAll(".logout-button").forEach(btn => btn.addEventListener("click", logout));
 document.getElementById("btnBackStock").addEventListener("click", showMenu);
 document.getElementById("btnBackCount").addEventListener("click", showMenu);
 document.getElementById("btnMenuStock").addEventListener("click", showStock);
