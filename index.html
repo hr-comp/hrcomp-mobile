@@ -81,6 +81,18 @@
 
 
 
+
+    <section id="menuSection" class="hidden">
+        <header class="stock-header">
+            <div><div class="company">HR COMP</div><h1>모바일 업무</h1></div>
+            <button class="logout-button btnLogout">로그아웃</button>
+        </header>
+        <div class="menu-grid">
+            <button id="btnMenuStock" class="menu-button">현재재고 조회</button>
+            <button id="btnMenuCount" class="menu-button">재고실사</button>
+        </div>
+    </section>
+
     <!-- =====================================================
          STOCK
          ===================================================== -->
@@ -108,7 +120,7 @@
 
                 로그아웃
 
-            </button>
+            </button></div>
 
         </header>
 
@@ -147,8 +159,43 @@
     </section>
 
 
-</div>
 
+    <section id="countSection" class="hidden">
+        <header class="stock-header">
+            <div><div class="company">HR COMP</div><h1>재고실사</h1></div>
+            <div class="header-actions">
+                <button id="btnBackCount" class="back-button">업무메뉴</button>
+                <button class="logout-button btnLogout">로그아웃</button>
+            </div>
+        </header>
+
+        <div class="filter-card">
+            <label>실사번호</label>
+            <select id="cboStockCount"></select>
+            <div id="countProgress" class="progress-box">진행현황: -</div>
+
+            <div class="filter-row">
+                <div><label>Part Type</label><select id="cboPartType"><option value="">전체</option></select></div>
+                <div><label>입력상태</label>
+                    <select id="cboInputStatus">
+                        <option value="NOT_ENTERED" selected>미입력</option>
+                        <option value="ENTERED">입력</option>
+                        <option value="ALL">전체</option>
+                    </select>
+                </div>
+            </div>
+
+            <label class="top-label">품번 검색</label>
+            <div class="search-area">
+                <input id="txtCountPartNo" type="text" placeholder="예: WHP, HBH" autocomplete="off">
+                <button id="btnCountSearch">검색</button>
+            </div>
+        </div>
+        <div id="countResultCount" class="result-count">실사번호를 선택하세요.</div>
+        <div id="countList"></div>
+    </section>
+
+</div>
 
 <script src="stock.js"></script>
 
