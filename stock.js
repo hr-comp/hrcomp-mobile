@@ -152,8 +152,22 @@ async function loadStockPartNames() {
 
         console.error(error);
 
+        alert(
+            "품목분류 조회 오류\n\n" +
+            "message: " + (error.message || "") + "\n" +
+            "details: " + (error.details || "") + "\n" +
+            "hint: " + (error.hint || "") + "\n" +
+            "code: " + (error.code || "")
+        );
+
         return;
     }
+
+    alert(
+        "품목분류 조회 성공 : " +
+        (data ? data.length : 0) +
+        "건"
+    );
 
     cboStockPartName.innerHTML =
         '<option value="">전체</option>' +
