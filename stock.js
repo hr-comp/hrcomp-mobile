@@ -57,6 +57,9 @@ const btnLogout =
 const txtSearch =
     document.getElementById("txtSearch");
 
+const cboStockPartType =
+    document.getElementById("cboStockPartType");
+
 const btnSearch =
     document.getElementById("btnSearch");
 
@@ -117,7 +120,7 @@ function showMenu() {
 }
 
 
-function showStock() {
+async function showStock() {
 
     loginSection.classList.add("hidden");
     menuSection.classList.add("hidden");
@@ -125,7 +128,44 @@ function showStock() {
 
     stockSection.classList.remove("hidden");
 
+    await loadStockPartTypes();
+
     txtSearch.focus();
+}
+
+
+// ============================================================
+// STOCK PART TYPE
+// ============================================================
+
+async function loadStockPartTypes() {
+
+    cboStockPartType.innerHTML =
+        '<option value="">전체</option>';
+
+    const { data, error } =
+        await db.rpc(
+            "rpc_mobile_common_query",
+            {
+                p_domain: "PART_TYPE"
+            }
+        );
+
+    if (error) {
+
+        console.error(error);
+
+        return;
+    }
+
+    cboStockPartType.innerHTML =
+        '<option value="">전체</option>' +
+        (data || []).map(
+            r =>
+                `<option value="${escapeHtml(r.code)}">` +
+                `${escapeHtml(r.name)}` +
+                `</option>`
+        ).join("");
 }
 
 
@@ -236,7 +276,10 @@ async function loadStock() {
                         ? null
                         : searchText,
 
-                p_include_zero: false
+                p_include_zero: false,
+
+                p_part_type:
+                    cboStockPartType.value || null
             }
         );
 
@@ -456,6 +499,12 @@ document.getElementById("btnMenuCount")
 
 btnSearch.addEventListener(
     "click",
+    loadStock
+);
+
+
+cboStockPartType.addEventListener(
+    "change",
     loadStock
 );
 
