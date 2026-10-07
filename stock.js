@@ -128,19 +128,19 @@ async function showStock() {
 
     stockSection.classList.remove("hidden");
 
-    await loadStockPartNames();
+    await loadPartNameCombo(cboStockPartName);
 
     txtSearch.focus();
 }
 
 
 // ============================================================
-// STOCK PART NAME (품목분류)
+// COMMON PART NAME COMBO
 // ============================================================
 
-async function loadStockPartNames() {
+async function loadPartNameCombo(cbo) {
 
-    cboStockPartName.innerHTML =
+    cbo.innerHTML =
         '<option value="">전체</option>';
 
     const { data, error } =
@@ -152,24 +152,10 @@ async function loadStockPartNames() {
 
         console.error(error);
 
-        alert(
-            "품목분류 조회 오류\n\n" +
-            "message: " + (error.message || "") + "\n" +
-            "details: " + (error.details || "") + "\n" +
-            "hint: " + (error.hint || "") + "\n" +
-            "code: " + (error.code || "")
-        );
-
         return;
     }
 
-    alert(
-        "품목분류 조회 성공 : " +
-        (data ? data.length : 0) +
-        "건"
-    );
-
-    cboStockPartName.innerHTML =
+    cbo.innerHTML =
         '<option value="">전체</option>' +
         (data || []).map(
             r =>
@@ -543,6 +529,10 @@ async function showCount() {
 
     countSection.classList.remove("hidden");
 
+    await loadPartNameCombo(
+        document.getElementById("cboPartType")
+    );
+
     await loadStockCountList();
 }
 
@@ -639,28 +629,6 @@ async function stockCountChanged() {
 
         return;
     }
-
-
-    const types =
-        [
-            ...new Set(
-                (data || [])
-                    .map(r => r.part_name)
-                    .filter(Boolean)
-            )
-        ].sort();
-
-
-    document.getElementById(
-        "cboPartType"
-    ).innerHTML =
-        '<option value="">전체</option>' +
-        types.map(
-            t =>
-                `<option value="${escapeHtml(t)}">
-                    ${escapeHtml(t)}
-                 </option>`
-        ).join("");
 
 
     document.getElementById(
