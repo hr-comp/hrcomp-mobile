@@ -645,7 +645,7 @@ async function stockCountChanged() {
         [
             ...new Set(
                 (data || [])
-                    .map(r => r.part_type)
+                    .map(r => r.part_name)
                     .filter(Boolean)
             )
         ].sort();
