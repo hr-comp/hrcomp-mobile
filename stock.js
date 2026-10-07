@@ -57,8 +57,8 @@ const btnLogout =
 const txtSearch =
     document.getElementById("txtSearch");
 
-const cboStockPartType =
-    document.getElementById("cboStockPartType");
+const cboStockPartName =
+    document.getElementById("cboStockPartName");
 
 const btnSearch =
     document.getElementById("btnSearch");
@@ -128,27 +128,24 @@ async function showStock() {
 
     stockSection.classList.remove("hidden");
 
-    await loadStockPartTypes();
+    await loadStockPartNames();
 
     txtSearch.focus();
 }
 
 
 // ============================================================
-// STOCK PART TYPE
+// STOCK PART NAME (품목분류)
 // ============================================================
 
-async function loadStockPartTypes() {
+async function loadStockPartNames() {
 
-    cboStockPartType.innerHTML =
+    cboStockPartName.innerHTML =
         '<option value="">전체</option>';
 
     const { data, error } =
         await db.rpc(
-            "rpc_mobile_common_query",
-            {
-                p_domain: "PART_TYPE"
-            }
+            "rpc_mobile_part_name_query"
         );
 
     if (error) {
@@ -158,12 +155,12 @@ async function loadStockPartTypes() {
         return;
     }
 
-    cboStockPartType.innerHTML =
+    cboStockPartName.innerHTML =
         '<option value="">전체</option>' +
         (data || []).map(
             r =>
-                `<option value="${escapeHtml(r.code)}">` +
-                `${escapeHtml(r.name)}` +
+                `<option value="${escapeHtml(r.part_name)}">` +
+                `${escapeHtml(r.part_name)}` +
                 `</option>`
         ).join("");
 }
@@ -278,8 +275,8 @@ async function loadStock() {
 
                 p_include_zero: false,
 
-                p_part_type:
-                    cboStockPartType.value || null
+                p_part_name:
+                    cboStockPartName.value || null
             }
         );
 
@@ -503,7 +500,7 @@ btnSearch.addEventListener(
 );
 
 
-cboStockPartType.addEventListener(
+cboStockPartName.addEventListener(
     "change",
     loadStock
 );
