@@ -9,7 +9,9 @@
 
     <title>HR COMP 모바일</title>
 
-    <link rel="stylesheet" href="stock.css">
+    <link rel="stylesheet" href="css/common.css?v=20261010-02">
+    <link rel="stylesheet" href="css/stock.css?v=20261010-02">
+    <link rel="stylesheet" href="css/delivery.css?v=20261010-02">
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -90,6 +92,7 @@
         <div class="menu-grid">
             <button id="btnMenuStock" class="menu-button">현재재고 조회</button>
             <button id="btnMenuCount" class="menu-button">재고실사</button>
+            <button id="btnMenuDelivery" class="menu-button">고객주문 납기관리</button>
         </div>
     </section>
 
@@ -203,9 +206,49 @@
         <div id="countList"></div>
     </section>
 
+    <!-- CUSTOMER ORDER DELIVERY (READ ONLY) -->
+    <section id="deliverySection" class="hidden">
+        <header class="stock-header">
+            <div><div class="company">HR COMP</div><h1>고객주문 납기관리</h1></div>
+            <div class="header-actions">
+                <button id="btnBackDelivery" class="back-button">업무메뉴</button>
+                <button class="logout-button btnLogout">로그아웃</button>
+            </div>
+        </header>
+
+        <div id="deliveryOrdersPanel">
+            <div class="filter-card">
+                <label for="txtDeliverySearch">고객사 / 주문번호 검색</label>
+                <div class="search-area">
+                    <input id="txtDeliverySearch" type="search" placeholder="전체 조회 또는 검색어 입력" autocomplete="off">
+                    <button id="btnDeliverySearch">검색</button>
+                </div>
+            </div>
+            <div id="deliveryOrderCount" class="result-count">조회 중...</div>
+            <div id="deliveryOrderList"></div>
+        </div>
+
+        <div id="deliveryItemsPanel" class="hidden">
+            <button id="btnDeliveryToOrders" class="delivery-nav">← 고객주문 목록</button>
+            <div id="deliverySelectedOrder" class="delivery-context"></div>
+            <div id="deliveryItemCount" class="result-count"></div>
+            <div id="deliveryItemList"></div>
+        </div>
+
+        <div id="deliveryTracePanel" class="hidden">
+            <button id="btnDeliveryToItems" class="delivery-nav">← 품목별 납기현황</button>
+            <div id="deliveryTraceContext" class="delivery-context"></div>
+            <div id="deliveryTraceList"></div>
+        </div>
+    </section>
+
 </div>
 
-<script src="stock.js?v=20261007-02"></script>
+<script src="js/config.js?v=20261010-02"></script>
+<script src="js/app.js?v=20261010-02"></script>
+<script src="js/stock.js?v=20261010-02"></script>
+<script src="js/delivery.js?v=20261010-02"></script>
+<script src="js/auth.js?v=20261010-02"></script>
 
 </body>
 
