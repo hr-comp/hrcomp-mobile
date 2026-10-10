@@ -11,20 +11,6 @@ const menuSection =
 const countSection =
     document.getElementById("countSection");
 
-
-const txtEmail =
-    document.getElementById("txtEmail");
-
-const txtPassword =
-    document.getElementById("txtPassword");
-
-const btnLogin =
-    document.getElementById("btnLogin");
-
-const loginMessage =
-    document.getElementById("loginMessage");
-
-
 const btnLogout =
     document.getElementById("btnLogout");
 
