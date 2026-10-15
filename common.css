@@ -1,0 +1,238 @@
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background: #f5f6f8;
+    color: #222;
+}
+
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 18px 14px;
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+/* =========================================================
+   COMMON
+   ========================================================= */
+
+.company {
+    font-size: 14px;
+    font-weight: 700;
+    color: #666;
+}
+
+
+h1 {
+    margin: 4px 0 0 0;
+    font-size: 25px;
+}
+
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+.login-header {
+    margin-top: 45px;
+    margin-bottom: 25px;
+}
+
+
+.login-card {
+    background: white;
+
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+
+    padding: 20px;
+}
+
+
+.login-card label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.login-card input {
+    width: 100%;
+    height: 46px;
+
+    margin-bottom: 17px;
+    padding: 0 12px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+
+.login-button {
+    width: 100%;
+    height: 48px;
+
+    margin-top: 3px;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: #222;
+    color: white;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.login-message {
+    min-height: 20px;
+
+    margin-top: 12px;
+
+    text-align: center;
+
+    font-size: 13px;
+    color: #b00020;
+}
+
+
+
+/* =========================================================
+   STOCK HEADER
+   ========================================================= */
+
+.stock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 20px;
+}
+
+
+.logout-button {
+    margin-top: 5px;
+
+    border: 1px solid #ccc;
+    border-radius: 7px;
+
+    background: white;
+
+    padding: 7px 10px;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.search-area {
+    display: flex;
+    gap: 8px;
+}
+
+
+.search-area input {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 46px;
+    padding: 0 13px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+
+.search-area button {
+    width: 72px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: #222;
+    color: white;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.result-count {
+    margin: 15px 2px 8px 2px;
+
+    font-size: 13px;
+    color: #666;
+}
+
+
+
+
+/* Common application navigation */
+.header-actions { display:flex; gap:6px; }
+.back-button { margin-top:5px; border:1px solid #ccc; border-radius:7px; background:white; padding:7px 10px; font-size:12px; cursor:pointer; }
+.menu-grid { display:grid; gap:12px; margin-top:24px; }
+.menu-button { min-height:70px; border:0; border-radius:10px; background:#222; color:white; font-size:18px; font-weight:700; cursor:pointer; }
+.filter-card { background:white; border:1px solid #e1e1e1; border-radius:10px; padding:14px; }
+.filter-card label { display:block; margin-bottom:6px; font-size:13px; font-weight:700; color:#555; }
+.filter-card select { width:100%; height:46px; padding:0 10px; border:1px solid #ccc; border-radius:8px; background:white; font-size:15px; }
+.filter-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+.top-label { margin-top:12px; }
+.progress-box { margin-top:12px; padding:10px 12px; border-radius:8px; background:#f5f6f8; font-size:14px; font-weight:700; }
+@media(max-width:380px){ .filter-row{grid-template-columns:1fr;} .header-actions{flex-direction:column;} }
+
+/* Common empty/error message */
+.message {
+    background: white;
+
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+
+    padding: 25px 15px;
+
+    text-align: center;
+    color: #777;
+}
+
+

@@ -1,59 +1,4 @@
-// ============================================================
-// HR COMP
-// Mobile Stock Status V1
-// ============================================================
-
-
-// ------------------------------------------------------------
-// Supabase
-// ------------------------------------------------------------
-
-const SUPABASE_URL =
-    "https://ctwixabopviehfubqfzz.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_J1-FuFkGTuNbjudupyc0-w_DL3NiEy2";
-
-
-const db = supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
-
-// ------------------------------------------------------------
-// Controls
-// ------------------------------------------------------------
-
-const loginSection =
-    document.getElementById("loginSection");
-
-const stockSection =
-    document.getElementById("stockSection");
-
-const menuSection =
-    document.getElementById("menuSection");
-
-const countSection =
-    document.getElementById("countSection");
-
-
-const txtEmail =
-    document.getElementById("txtEmail");
-
-const txtPassword =
-    document.getElementById("txtPassword");
-
-const btnLogin =
-    document.getElementById("btnLogin");
-
-const loginMessage =
-    document.getElementById("loginMessage");
-
-
-const btnLogout =
-    document.getElementById("btnLogout");
-
+// Stock query and stock count V2
 const txtSearch =
     document.getElementById("txtSearch");
 
@@ -70,73 +15,14 @@ const resultCount =
     document.getElementById("resultCount");
 
 
-// ============================================================
-// INITIALIZE
-// ============================================================
-
-async function initialize() {
-
-    const {
-        data: { session }
-    } = await db.auth.getSession();
-
-
-    if (session) {
-
-        showMenu();
-
-    } else {
-
-        showLogin();
-    }
-}
-
-
-// ============================================================
-// SCREEN
-// ============================================================
-
-function showLogin() {
-
-    stockSection.classList.add("hidden");
-    menuSection.classList.add("hidden");
-    countSection.classList.add("hidden");
-
-    loginSection.classList.remove("hidden");
-
-    loginMessage.textContent = "";
-
-    txtPassword.value = "";
-}
-
-
-function showMenu() {
-
-    loginSection.classList.add("hidden");
-    stockSection.classList.add("hidden");
-    countSection.classList.add("hidden");
-
-    menuSection.classList.remove("hidden");
-}
-
-
 async function showStock() {
-
-    loginSection.classList.add("hidden");
-    menuSection.classList.add("hidden");
-    countSection.classList.add("hidden");
-
-    stockSection.classList.remove("hidden");
+    showSection('stockSection');
 
     await loadPartNameCombo(cboStockPartName);
 
     txtSearch.focus();
 }
 
-
-// ============================================================
-// COMMON PART NAME COMBO
-// ============================================================
 
 async function loadPartNameCombo(cbo) {
 
@@ -163,88 +49,6 @@ async function loadPartNameCombo(cbo) {
                 `${escapeHtml(r.part_name)}` +
                 `</option>`
         ).join("");
-}
-
-
-// ============================================================
-// LOGIN
-// ============================================================
-
-async function login() {
-
-    const email =
-        txtEmail.value.trim();
-
-    const password =
-        txtPassword.value;
-
-
-    if (!email || !password) {
-
-        loginMessage.textContent =
-            "이메일과 비밀번호를 입력하세요.";
-
-        return;
-    }
-
-
-    btnLogin.disabled = true;
-
-    btnLogin.textContent =
-        "로그인 중...";
-
-    loginMessage.textContent = "";
-
-
-    const { error } =
-        await db.auth.signInWithPassword({
-            email: email,
-            password: password
-        });
-
-
-    btnLogin.disabled = false;
-
-    btnLogin.textContent =
-        "로그인";
-
-
-    if (error) {
-
-        console.error(error);
-
-        loginMessage.textContent =
-            "이메일 또는 비밀번호를 확인하세요.";
-
-        return;
-    }
-
-
-    showMenu();
-}
-
-
-// ============================================================
-// LOGOUT
-// ============================================================
-
-async function logout() {
-
-    await db.auth.signOut();
-
-    stockList.innerHTML = "";
-
-    document.getElementById("countList").innerHTML = "";
-
-    menuSection.classList.add("hidden");
-    countSection.classList.add("hidden");
-
-    resultCount.textContent =
-        "품번 또는 품명을 입력하세요.";
-
-    txtSearch.value = "";
-
-    showLogin();
 }
 
 
@@ -411,123 +215,18 @@ function renderStock(rows) {
 }
 
 
-// ============================================================
-// HTML ESCAPE
-// ============================================================
 
-function escapeHtml(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-        return "";
-    }
-
-
-    return String(value)
-
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-}
-
-
-// ============================================================
-// EVENTS
-// ============================================================
-
-btnLogin.addEventListener(
-    "click",
-    login
-);
-
-
-txtPassword.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (event.key === "Enter") {
-            login();
-        }
-    }
-);
-
-
-document.querySelectorAll(".logout-button")
-    .forEach(
-        btn =>
-            btn.addEventListener(
-                "click",
-                logout
-            )
-    );
-
-
-document.getElementById("btnBackStock")
-    .addEventListener(
-        "click",
-        showMenu
-    );
-
-
-document.getElementById("btnBackCount")
-    .addEventListener(
-        "click",
-        showMenu
-    );
-
-
-document.getElementById("btnMenuStock")
-    .addEventListener(
-        "click",
-        showStock
-    );
-
-
-document.getElementById("btnMenuCount")
-    .addEventListener(
-        "click",
-        showCount
-    );
-
-
-btnSearch.addEventListener(
-    "click",
-    loadStock
-);
-
-
-cboStockPartName.addEventListener(
-    "change",
-    loadStock
-);
-
-
-txtSearch.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (event.key === "Enter") {
-            loadStock();
-        }
-    }
-);
-
-
+document.getElementById('btnMenuStock').addEventListener('click',showStock);
+document.getElementById('btnMenuCount').addEventListener('click',showCount);
+btnSearch.addEventListener('click',loadStock);
+cboStockPartName.addEventListener('change',loadStock);
+txtSearch.addEventListener('keydown',e=>{if(e.key==='Enter')loadStock();});
 // ============================================================
 // STOCK COUNT V2
 // ============================================================
 
 async function showCount() {
-
-    loginSection.classList.add("hidden");
-    menuSection.classList.add("hidden");
-    stockSection.classList.add("hidden");
-
-    countSection.classList.remove("hidden");
+    showSection('countSection');
 
     await loadPartNameCombo(
         document.getElementById("cboPartType")
@@ -1084,8 +783,3 @@ document.getElementById(
 );
 
 
-// ============================================================
-// START
-// ============================================================
-
-initialize();
