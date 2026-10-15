@@ -68,8 +68,6 @@ async function loadDeliveryOrders() {
             <div class="delivery-grid">
                 ${deliveryCell('최초 미출하 납기',deliveryDate(r.earliest_delivery_date))}
                 ${deliveryCell('미출하수량',deliveryNum(r.unshipped_qty))}
-                ${deliveryCell('미출하 품목수',deliveryNum(r.undelivered_item_count))}
-                ${deliveryCell('납기초과 품목수',deliveryNum(r.overdue_item_count))}
                 ${deliveryCell('재고부족 품목수',deliveryHeaderSummary.has(String(r.customer_order_id)) ? deliveryNum(deliveryHeaderSummary.get(String(r.customer_order_id)).shortage_part_count) : '-')}
                 ${deliveryCell('추가확보 필요품목수',deliveryHeaderSummary.has(String(r.customer_order_id)) ? deliveryNum(deliveryHeaderSummary.get(String(r.customer_order_id)).additional_required_part_count) : '-')}
                 ${deliveryCell('F/UP 현황',deliveryHeaderSummary.has(String(r.customer_order_id)) ? deliveryNum(deliveryHeaderSummary.get(String(r.customer_order_id)).followup_part_count)+'/'+deliveryNum(r.undelivered_item_count) : '-')}
@@ -149,7 +147,7 @@ async function loadDeliveryTrace(item) {
                 ${deliveryStatusBadge(x.purchase_schedule_status)}
                 <div class="delivery-grid">
                     ${deliveryCell('입고예정일',deliveryDate(x.expected_date))}
-                    ${deliveryCell('발주 미입고',deliveryNum(x.purchase_open_qty))}
+                    ${deliveryCell('해당 발주 미입고잔량',deliveryNum(x.purchase_open_qty))}
                     ${deliveryCell('발주수량',deliveryNum(x.purchase_order_qty))}
                     ${deliveryCell('입고수량',deliveryNum(x.purchase_received_qty))}
                     ${deliveryCell('납기 지연일수',x.delivery_delay_days == null ? '-' : String(x.delivery_delay_days))}
@@ -171,7 +169,7 @@ async function loadDeliveryTrace(item) {
                     ${deliveryCell('다음확인일',deliveryDate(f.next_followup_date))}
                     ${deliveryCell('작성자',f.created_by || '-')}
                 </div>
-                <div class="delivery-note">${escapeHtml(f.content || '')}</div>
+                <div class="delivery-note"><span class="delivery-cell-label">조치내용</span><div>${escapeHtml(f.content || '')}</div></div>
             </div>`).join('') : '<div class="message">등록된 F/UP 이력이 없습니다.</div>'}
     `);
 }
