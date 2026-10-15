@@ -137,7 +137,7 @@ async function loadDeliveryTrace(item) {
                 ${deliveryCell('납기 내 공급가능수량',deliveryNum(r.total_supply_qty))}
                 ${deliveryCell('납기 내 공급부족수량',deliveryNum(r.supply_shortage_qty))}
             </div>
-            <div class="delivery-note">공급가능수량은 납기 내 배정 기준입니다. 전체 현재재고 및 발주 미입고수량과 단순 합산하지 마십시오.</div>
+            <div class="delivery-note">공급가능수량은 납기 내 배정 기준입니다. 전체 현재재고 및 발주 미입고잔량과 단순 합산하지 마십시오.</div>
         </div>
         <div class="delivery-section-title">구매발주 입고예정 현황 (${poRows.length}건)</div>
         ${poRows.length ? poRows.map(x=>`
@@ -159,9 +159,10 @@ async function loadDeliveryTrace(item) {
     });
     if(token!==deliveryRequestNo) return;
     const historyRows = history.error ? [] : (history.data || []);
-    list.insertAdjacentHTML('beforeend', `
+    const purchaseHeading = Array.from(list.querySelectorAll('.delivery-section-title')).find(el => el.textContent.startsWith('구매발주 입고예정 현황'));
+    const followupHtml = `
         <div class="delivery-section-title">F/UP 이력 (${historyRows.length}건)</div>
-        ${history.error ? '<div class="message">F/UP 이력을 불러오지 못했습니다.</div>' :
+        ${history.error ? `<div class="message">F/UP 조회 오류: ${escapeHtml(history.error.message || '알 수 없는 오류')}</div>` :
           historyRows.length ? historyRows.map(f=>`
             <div class="delivery-card">
                 <div class="delivery-grid">
@@ -171,7 +172,9 @@ async function loadDeliveryTrace(item) {
                 </div>
                 <div class="delivery-note"><span class="delivery-cell-label">조치내용</span><div>${escapeHtml(f.content || '')}</div></div>
             </div>`).join('') : '<div class="message">등록된 F/UP 이력이 없습니다.</div>'}
-    `);
+    `;
+    if (purchaseHeading) purchaseHeading.insertAdjacentHTML('beforebegin', followupHtml);
+    else list.insertAdjacentHTML('beforeend', followupHtml);
 }
 
 document.getElementById('btnMenuDelivery').addEventListener('click',showDelivery);
