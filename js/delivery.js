@@ -177,7 +177,10 @@ async function loadDeliveryTrace(item) {
     else list.insertAdjacentHTML('beforeend', followupHtml);
 }
 
-document.getElementById('btnMenuDelivery').addEventListener('click',showDelivery);
+document.getElementById('btnMenuDelivery').addEventListener('click', () => {
+    window.location.assign('https://hrcomp-admin.github.io/hrcomp-delivery-pages/');
+});
+
 document.getElementById('btnBackDelivery').addEventListener('click',()=>{++deliveryRequestNo;showMenu();});
 document.getElementById('btnDeliverySearch').addEventListener('click',loadDeliveryOrders);
 document.getElementById('txtDeliverySearch').addEventListener('keydown',e=>{if(e.key==='Enter')loadDeliveryOrders();});
