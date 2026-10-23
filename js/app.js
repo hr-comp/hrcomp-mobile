@@ -45,17 +45,9 @@ function escapeHtml(value) {
 document.getElementById('btnBackStock').addEventListener('click',returnToPortal);
 document.getElementById('btnBackCount').addEventListener('click',returnToPortal);
 
-// Return to the portal tab that launched this module, when available.
-// A directly opened module has no opener; navigate to the portal instead.
+// Reliable mobile fallback: navigate this tab to the ERP portal.
+// This deliberately avoids window.opener.focus(), which mobile browsers may ignore.
 const ERP_PORTAL_URL = 'https://hrcomp-admin.github.io/hrcomp-erp-portal/';
 function returnToPortal() {
-    try {
-        if (window.opener && !window.opener.closed) {
-            window.opener.focus();
-            return;
-        }
-    } catch (e) {
-        console.warn('Portal tab focus unavailable:', e);
-    }
     window.location.assign(ERP_PORTAL_URL);
 }
