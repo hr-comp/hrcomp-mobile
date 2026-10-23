@@ -181,7 +181,7 @@ document.getElementById('btnMenuDelivery').addEventListener('click', () => {
     window.location.assign('https://hrcomp-admin.github.io/hrcomp-delivery-pages/');
 });
 
-document.getElementById('btnBackDelivery').addEventListener('click',()=>{++deliveryRequestNo;showMenu();});
+document.getElementById('btnBackDelivery').addEventListener('click',()=>{++deliveryRequestNo;returnToPortal();});
 document.getElementById('btnDeliverySearch').addEventListener('click',loadDeliveryOrders);
 document.getElementById('txtDeliverySearch').addEventListener('keydown',e=>{if(e.key==='Enter')loadDeliveryOrders();});
 document.getElementById('btnDeliveryToOrders').addEventListener('click',()=>{++deliveryRequestNo;deliveryPanel('deliveryOrdersPanel');});
