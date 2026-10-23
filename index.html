@@ -14,6 +14,13 @@
     <link rel="stylesheet" href="css/delivery.css?v=20261015-01">
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+/* iPhone Safari viewport guards for existing mobile stock and count screens. */
+html, body, .container { max-width: 100%; min-width: 0; }
+*, *::before, *::after { box-sizing: border-box; }
+input, select, textarea { max-width: 100%; min-width: 0; }
+input[type="date"] { width: 100%; min-width: 0; max-width: 100%; }
+</style>
 </head>
 
 
@@ -250,6 +257,22 @@
 <script src="js/delivery.js?v=20261019-01"></script>
 <script src="js/auth.js?v=20261023-portal01"></script>
 
+<script>
+// iPhone/iPad Safari fallback: keep this work tab intact when returning to portal.
+// On PC/Android, retain the proven named-tab reuse target.
+(function () {
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (!isIOS) return;
+  ['btnBackStock', 'btnBackCount', 'btnBackDelivery'].forEach(function (id) {
+    var link = document.getElementById(id);
+    if (link) {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener');
+    }
+  });
+})();
+</script>
 </body>
 
 </html>
