@@ -12,6 +12,14 @@ const loginMessage =
     document.getElementById("loginMessage");
 
 
+// 포털에서 전달된 업무 요청. 허용된 메뉴 코드만 처리합니다.
+const requestedMenu = new URLSearchParams(window.location.search).get('menu');
+function showRequestedMenu() {
+    if (requestedMenu === 'stock') return showStock();
+    if (requestedMenu === 'count') return showCount();
+    showMenu();
+}
+
 async function initialize() {
 
     const {
@@ -21,7 +29,7 @@ async function initialize() {
 
     if (session) {
 
-        showMenu();
+        await showRequestedMenu();
 
     } else {
 
@@ -85,7 +93,7 @@ async function login() {
     }
 
 
-    showMenu();
+    await showRequestedMenu();
 }
 
 
